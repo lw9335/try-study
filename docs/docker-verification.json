@@ -1,0 +1,69 @@
+{
+  "database": "PostgreSQL",
+  "schemaVersion": 2,
+  "legacyImport": {
+    "imported": true,
+    "runs": 6,
+    "events": 255,
+    "timestamp": "2026-10-18T07:28:44.738+00:00"
+  },
+  "tables": [
+    {
+      "name": "runs",
+      "count": 8
+    },
+    {
+      "name": "events",
+      "count": 273
+    },
+    {
+      "name": "checkpoints",
+      "count": 10
+    }
+  ],
+  "exercise": {
+    "parentRunId": "5e5b00af-c953-45d1-9281-39371eeac3e5",
+    "parentStatus": "cancelled",
+    "checkpointId": "8b99a2c9-2ab1-4d3a-895a-e6396c39009f",
+    "checkpointStep": 1,
+    "childRunId": "5316c831-6366-4bab-9781-e12918b57030",
+    "childStatus": "completed",
+    "parentTerminalCount": 1,
+    "childTerminalCount": 1,
+    "childRepeatedToolCalls": 0,
+    "answer": "42",
+    "replayFromSeq": 8,
+    "replayFirstSeq": 9
+  },
+  "restartVerified": true,
+  "testSuite": {
+    "passed": 77,
+    "includesPostgreSQL": true,
+    "includesSQLite": true,
+    "includesRealTCP": true
+  },
+  "finalTables": [
+    {
+      "name": "runs",
+      "count": 9
+    },
+    {
+      "name": "events",
+      "count": 287
+    },
+    {
+      "name": "checkpoints",
+      "count": 13
+    }
+  ],
+  "visibleFullCheckpointRunId": "ebd5ce78-9264-44c7-a60a-c78a9cbe27e3",
+  "uiVerified": [
+    "database health",
+    "Run Store table",
+    "checkpoint initial/step/final history",
+    "checkpoint snapshot messages",
+    "token usage",
+    "single terminal count",
+    "TTFT and percentiles"
+  ]
+}

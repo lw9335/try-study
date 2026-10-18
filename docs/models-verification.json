@@ -1,0 +1,198 @@
+{
+  "checkedAt": "2026-10-18T07:20:50.874692+00:00",
+  "baseUrl": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+  "note": "Short live streaming calls, thinking disabled, tools disabled, max_tokens=16. No API key stored.",
+  "results": [
+    {
+      "model": "qwen-plus",
+      "family": "Qwen",
+      "thinkingMode": "optional",
+      "httpStatus": 200,
+      "passed": true,
+      "responseKeys": [
+        "choices",
+        "created",
+        "id",
+        "model",
+        "object",
+        "usage"
+      ],
+      "deltaKeys": [
+        "content",
+        "role"
+      ],
+      "finishReason": "stop",
+      "done": true,
+      "ttftMs": 536,
+      "answer": "OK.",
+      "elapsedMs": 598
+    },
+    {
+      "model": "qwen3.8-flash",
+      "family": "Qwen",
+      "thinkingMode": "optional",
+      "httpStatus": 200,
+      "passed": true,
+      "responseKeys": [
+        "choices",
+        "created",
+        "id",
+        "model",
+        "object",
+        "usage"
+      ],
+      "deltaKeys": [
+        "content",
+        "role"
+      ],
+      "finishReason": "stop",
+      "done": true,
+      "ttftMs": 404,
+      "answer": "OK",
+      "elapsedMs": 481
+    },
+    {
+      "model": "qwen3.7-plus",
+      "family": "Qwen",
+      "thinkingMode": "optional",
+      "httpStatus": 200,
+      "passed": true,
+      "responseKeys": [
+        "choices",
+        "created",
+        "id",
+        "model",
+        "object",
+        "usage"
+      ],
+      "deltaKeys": [
+        "content",
+        "role"
+      ],
+      "finishReason": "stop",
+      "done": true,
+      "ttftMs": 915,
+      "answer": "OK",
+      "elapsedMs": 968
+    },
+    {
+      "model": "qwen-max",
+      "family": "Qwen",
+      "thinkingMode": "none",
+      "httpStatus": 200,
+      "passed": true,
+      "responseKeys": [
+        "choices",
+        "created",
+        "id",
+        "model",
+        "object",
+        "system_fingerprint",
+        "usage"
+      ],
+      "deltaKeys": [
+        "content",
+        "role"
+      ],
+      "finishReason": "stop",
+      "done": true,
+      "ttftMs": 426,
+      "answer": "OK.",
+      "elapsedMs": 551
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "family": "DeepSeek",
+      "thinkingMode": "optional",
+      "httpStatus": 200,
+      "passed": true,
+      "responseKeys": [
+        "choices",
+        "created",
+        "id",
+        "model",
+        "object",
+        "usage"
+      ],
+      "deltaKeys": [
+        "content",
+        "role"
+      ],
+      "finishReason": "stop",
+      "done": true,
+      "ttftMs": 787,
+      "answer": "OK",
+      "elapsedMs": 907
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "family": "DeepSeek",
+      "thinkingMode": "optional",
+      "httpStatus": 200,
+      "passed": true,
+      "responseKeys": [
+        "choices",
+        "created",
+        "id",
+        "model",
+        "object",
+        "usage"
+      ],
+      "deltaKeys": [
+        "content",
+        "role"
+      ],
+      "finishReason": "stop",
+      "done": true,
+      "ttftMs": 1070,
+      "answer": "OK",
+      "elapsedMs": 1106
+    }
+  ],
+  "toolLoopChecks": [
+    {
+      "model": "qwen-plus",
+      "status": "completed",
+      "toolCalls": 1,
+      "checkpointStep": 2,
+      "answer": "42",
+      "terminal": "run.completed",
+      "errorCode": null
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "status": "completed",
+      "toolCalls": 1,
+      "checkpointStep": 2,
+      "answer": "42",
+      "terminal": "run.completed",
+      "errorCode": null
+    }
+  ],
+  "thinkingToolChecks": [
+    {
+      "model": "qwen-plus",
+      "status": "completed",
+      "tools": 1,
+      "reasoningChunks": 116,
+      "answer": "5",
+      "errorCode": null
+    },
+    {
+      "model": "deepseek-v4.1-flash",
+      "status": "completed",
+      "tools": 1,
+      "reasoningChunks": 5,
+      "answer": "5",
+      "errorCode": null
+    }
+  ],
+  "gatewayCheck": {
+    "model": "deepseek-v4.1-flash",
+    "status": "completed",
+    "tools": true,
+    "thinking": true,
+    "reasoningHistoryPreserved": true,
+    "runId": "2aeb7760-90d1-48de-b661-e3b9b275aaea"
+  }
+}

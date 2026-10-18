@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Streaming Agent Gateway</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <header><div class="brand"><span class="logo">S</span><span>AGENT LAB <small>课后练习 / 01</small></span></div><div class="connection"><span class="dot"></span><span id="provider">连接中</span></div></header>
+  <main>
+    <section class="intro"><div class="eyebrow">OBSERVE · CANCEL · REPLAY · AUDIT</div><h1>Streaming Agent Gateway<span>.</span></h1><p>让每一次模型调用，都有迹可循。</p></section>
+    <section class="storage-overview" aria-label="持久化状态">
+      <div class="panel storage-card"><span class="eyebrow">DATABASE</span><strong id="dbEngine">连接数据库…</strong><small id="dbState">等待健康检查</small></div>
+      <div class="panel storage-card"><span class="eyebrow">RUN STORE</span><strong id="dbRuns">—</strong><small id="dbEvents">持久化事件</small><small id="dbLatency">TTFT 统计</small></div>
+      <div class="panel storage-card"><span class="eyebrow">CHECKPOINTS</span><strong id="dbCheckpoints">—</strong><small id="dbWorker">安全步骤快照</small></div>
+    </section>
+    <div class="workspace">
+      <aside class="panel composer"><div class="section-heading"><h2>创建运行</h2><span>01 / INPUT</span></div>
+        <form id="form"><label for="model">模型（千问 AI 平台）</label><select id="model" required></select><div class="switches"><label><input id="tools" type="checkbox" checked> 启用加法工具</label><label><input id="thinking" type="checkbox"> 思考模式</label></div>
+          <p id="modelHint" class="hint"></p>
+          <label for="prompt">你的任务</label><textarea id="prompt" rows="7" maxlength="16000" required placeholder="输入你的问题…">请计算 12 + 30，并解释结果。</textarea>
+          <button id="submit" class="primary" type="submit">开始运行 <span>↗</span></button></form>
+        <p class="hint" id="modeHint"></p>
+        <div class="section-heading history-heading"><h2>最近运行</h2><button id="refresh" class="text-button">刷新 ↻</button></div><div id="history" class="history"></div>
+      </aside>
+      <section class="panel output-panel"><div class="section-heading"><h2>流式输出</h2><span id="status" class="badge">READY</span></div>
+        <div class="metrics"><div><span>首个答案 TTFT</span><strong id="ttft">—</strong></div><div><span>事件数</span><strong id="count">0</strong></div><div><span>订阅状态</span><strong id="subscription">未订阅</strong></div></div>
+        <div class="run-id" id="runId">创建一个 Run，开始观察事件流。</div>
+        <div class="run-facts"><span>模型调用 <b id="modelCalls">0</b></span><span>工具执行 <b id="toolCalls">0</b></span><span>Token <b id="tokenCount">0</b></span><span>终态数 <b id="terminalCount">0</b></span></div>
+        <button id="parentRun" class="text-button lineage" hidden></button>
+        <details id="reasoningBox" hidden><summary>思考过程</summary><pre id="reasoning"></pre></details>
+        <div id="answer" class="answer"><div class="empty"><span>⌁</span><h3>等待第一个 delta</h3><p>输出、工具调用和运行状态将在这里实时呈现。</p></div></div>
+        <div id="notice" role="status" class="notice"></div>
+        <div class="controls"><button id="cancel" disabled>取消运行</button><button id="disconnect" disabled>断开订阅</button><button id="reconnect" disabled>恢复订阅</button><button id="replay" disabled>回放本 Run</button><button id="resume" disabled>从 Checkpoint 新建</button></div>
+      </section>
+    </div>
+    <section class="panel audit"><div class="section-heading"><h2>运行审计</h2><span>TRACE & CHECKPOINT</span></div><div class="tabs"><button id="tabEvents" class="active">事件时间线</button><button id="tabCheckpoint">Checkpoint 历史</button><button id="download" class="text-button" disabled>导出 Trace ↓</button></div><div id="timeline" class="timeline"><p class="hint">统一 Harness Event 将按序号显示，断线恢复会从最后收到的位置继续。</p></div><div id="checkpointPane" hidden><p class="hint">每个快照与事件序号原子保存。选择快照查看消息；失败或取消的 Run 可从选中的安全边界创建后续 Run。</p><div id="checkpointList" class="checkpoint-list"></div><div id="checkpointSelected" class="run-id">尚未选择运行</div><pre id="checkpoint"></pre></div></section>
+    <section class="panel database-panel"><div class="section-heading"><h2>数据库浏览 · Run Store</h2><button id="refreshStorage" class="text-button">刷新数据 ↻</button></div><div class="tabs"><button id="tableRuns" class="active">runs</button><button id="tableEvents">events</button><button id="tableCheckpoints">checkpoints</button></div><p id="tableDescription" class="hint"></p><div class="table-scroll"><table id="databaseTable"><thead></thead><tbody></tbody></table></div><div class="pagination"><span id="tablePage">—</span><button id="previousPage" disabled>上一页</button><button id="nextPage" disabled>下一页</button></div><details class="schema-details"><summary>查看真实数据库表结构</summary><pre id="databaseSchema"></pre></details><p class="hint">页面每 5 秒读取数据库统计。表浏览为只读操作；点击记录可打开对应 Run 的事件、错误协议和 checkpoint。</p></section>
+    <footer>Streaming Agent Gateway <span>Python · FastAPI · SSE · PostgreSQL / SQLite</span></footer>
+  </main><script type="module" src="/app.js"></script>
+</body></html>

@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.venv
+.git
+.pytest_cache
+.ruff_cache
+__pycache__
+**/__pycache__
+data
+node_modules
+src
+*.egg-info
+docs

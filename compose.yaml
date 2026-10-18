@@ -1,0 +1,53 @@
+name: streaming-agent-gateway
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: gateway
+      POSTGRES_USER: gateway
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?请在 .env 配置 POSTGRES_PASSWORD}
+    volumes:
+      - gateway-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U gateway -d gateway"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  gateway:
+    build:
+      context: .
+      target: runtime
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      DATABASE_URL: postgresql://gateway:${POSTGRES_PASSWORD}@postgres:5432/gateway
+      LEGACY_SQLITE_PATH: /legacy/gateway.sqlite
+    volumes:
+      - ./data:/legacy:ro
+    ports:
+      - "127.0.0.1:${GATEWAY_PORT:-3000}:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
+    restart: unless-stopped
+    stop_grace_period: 15s
+
+  tests:
+    profiles: [test]
+    build:
+      context: .
+      target: tests
+    environment:
+      MODEL_PROVIDER: demo
+      DATABASE_URL: ""
+      TEST_DATABASE_URL: postgresql://gateway:${POSTGRES_PASSWORD}@postgres:5432/gateway
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  gateway-postgres:
